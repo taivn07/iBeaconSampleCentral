@@ -2,11 +2,12 @@
 //  ViewController.m
 //  iBeaconSampleCentral
 //
-//  Created by kakegawa.atsushi on 2013/09/25.
-//  Copyright (c) 2013年 kakegawa.atsushi. All rights reserved.
+//  Created by demo on 2013/12/23.
+//  Copyright (c) 2013 demo. All rights reserved.
 //
 
 #import "ViewController.h"
+#import "DetailViewController.h"
 #import <CoreLocation/CoreLocation.h>
 
 @interface ViewController () <CLLocationManagerDelegate>
@@ -63,6 +64,9 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
+    if (_centralList.count == 0) {
+        return 1;
+    }
     return _centralList.count;
 }
 
@@ -104,18 +108,35 @@
         
         cell.textLabel.text = beaconName;
         cell.detailTextLabel.text = [rangeMessage stringByAppendingString:beaconDetail];
+    } else {
+        cell.textLabel.text = @"No beacons found";
+        cell.detailTextLabel.text = @"";
     }
     
     return cell;
 }
 
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    if (_centralList.count == 0) {
+        return FALSE;
+    } else {
+        return TRUE;
+    }
+}
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    DetailViewController *beacon = [segue destinationViewController];
+    NSIndexPath *path = [self.tableView indexPathForSelectedRow];
+    beacon.data = [_centralList objectAtIndex: path.row];
+}
 
 #pragma mark - CLLocationManagerDelegate methods
 
 - (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region
 {
     NSLog(@"Start Monitoring Region");
+    [self.locationManager startRangingBeaconsInRegion:self.beaconRegion];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
@@ -130,9 +151,7 @@
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
 {
     NSLog(@"exit Region");
-    [_centralList removeAllObjects];
-    [self.tableView reloadData];
-    
+
     if ([region isMemberOfClass:[CLBeaconRegion class]] && [CLLocationManager isRangingAvailable]) {
         [self.locationManager stopRangingBeaconsInRegion:(CLBeaconRegion *)region];
     }

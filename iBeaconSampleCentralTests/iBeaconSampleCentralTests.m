@@ -2,8 +2,8 @@
 //  iBeaconSampleCentralTests.m
 //  iBeaconSampleCentralTests
 //
-//  Created by kakegawa.atsushi on 2013/09/25.
-//  Copyright (c) 2013年 kakegawa.atsushi. All rights reserved.
+//  Created by demo on 2013/12/23.
+//  Copyright (c) 2013 demo. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
