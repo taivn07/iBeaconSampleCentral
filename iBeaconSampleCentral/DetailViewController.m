@@ -2,8 +2,8 @@
 //  DetailViewController.m
 //  iBeaconSampleCentral
 //
-//  Created by MAI THE TAI on 2013/12/26.
-//  Copyright (c) 2013年 kakegawa.atsushi. All rights reserved.
+//  Created by demo on 2013/12/23.
+//  Copyright (c) 2013 demo. All rights reserved.
 //
 
 #import "DetailViewController.h"
