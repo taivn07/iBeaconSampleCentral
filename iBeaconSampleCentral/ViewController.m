@@ -19,7 +19,7 @@
 @end
 
 @implementation ViewController {
-    NSMutableArray *_centralList;
+    NSArray *_centralList;
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -159,9 +159,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region
 {
-    [_centralList removeAllObjects];
-        
-    [_centralList addObjectsFromArray:beacons];
+    _centralList = beacons;
         
     [self.tableView reloadData];
 }
