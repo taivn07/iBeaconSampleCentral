@@ -52,10 +52,10 @@
             </objects>
             <point key="canvasLocation" x="778" y="35"/>
         </scene>
-        <!--View Controller-->
+        <!--Detail View Controller-->
         <scene sceneID="bgC-9d-ktW">
             <objects>
-                <viewController id="s3m-qS-iDO" sceneMemberID="viewController">
+                <viewController id="s3m-qS-iDO" customClass="DetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PnY-cf-P5z"/>
                         <viewControllerLayoutGuide type="bottom" id="MJt-dg-6yb"/>

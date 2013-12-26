@@ -63,6 +63,9 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
+    if (_centralList.count == 0) {
+        return 1;
+    }
     return _centralList.count;
 }
 
@@ -104,18 +107,29 @@
         
         cell.textLabel.text = beaconName;
         cell.detailTextLabel.text = [rangeMessage stringByAppendingString:beaconDetail];
+    } else {
+        cell.textLabel.text = @"No beacons found";
+        cell.detailTextLabel.text = @"";
     }
     
     return cell;
 }
 
-
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    if (_centralList.count == 0) {
+        return FALSE;
+    } else {
+        return TRUE;
+    }
+}
 
 #pragma mark - CLLocationManagerDelegate methods
 
 - (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region
 {
     NSLog(@"Start Monitoring Region");
+    [self.locationManager startRangingBeaconsInRegion:self.beaconRegion];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
