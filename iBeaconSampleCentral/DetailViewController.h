@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface DetailViewController : UIViewController
+@interface DetailViewController : UIViewController {
+    IBOutlet UILabel *major;
+    IBOutlet UILabel *minor;
+    IBOutlet UILabel *accuracy;
+    IBOutlet UILabel *rssi;
+}
+
+@property (nonatomic, strong) CLBeacon *data;
 
 @end
