@@ -104,7 +104,6 @@
         
         cell.textLabel.text = beaconName;
         cell.detailTextLabel.text = [rangeMessage stringByAppendingString:beaconDetail];
-        
     }
     
     return cell;
